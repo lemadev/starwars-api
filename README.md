@@ -22,3 +22,8 @@ api/character/id
 ```
 api/character/id/rating
 ```
+
+Run tests
+```
+docker-compose run app sh -c "python manage.py test"
+```

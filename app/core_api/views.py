@@ -3,16 +3,17 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from core_api.serializers import CharacterSerializer
 from core_api.models import  Character
+from rest_framework.response import Response
+from rest_framework import status
 import json
 
 def post_character(request, id, rating):
     if request.method == "POST":
             character = Character(id_personaje=id, rating=rating)
             character.save()
-            data = {'success':200}
-            return HttpResponse(data, )
+            return HttpResponse({"success": "Request successful"},status=status.HTTP_200_OK)
     else:
-        return HttpResponse('Operacion no autorizada')
+        return HttpResponse({"error": "Request failed"})
         
 def get_character(request, id):
     hay_chars = Character.objects.all()
@@ -31,11 +32,11 @@ def get_character(request, id):
                 resp['max_rating'] = ratings['max_rating']
             char = CharacterSerializer(resp)
             respuesta = json.dumps(char.data)
-            return HttpResponse(respuesta, content_type="application/json")
+            return HttpResponse(respuesta, status=status.HTTP_200_OK, content_type="application/json")
         else:
-            return HttpResponse('No hay valores para el id ingresado')
+            return HttpResponse({"error": "Request failed"}, status=response.status_code)
     else:
-        return HttpResponse('Operacion no autorizada', content_type="application/json")
+        return HttpResponse({"error": "Request failed"})
 
 def get_homeworld(url_planet):
     """Obtengo datos del planeta del character"""
