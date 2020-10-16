@@ -1,9 +1,7 @@
 import requests
 from django.http import HttpResponse
-from django.shortcuts import render
 from core_api.serializers import CharacterSerializer
 from core_api.models import  Character
-from rest_framework.response import Response
 from rest_framework import status
 import json
 
