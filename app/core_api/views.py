@@ -55,7 +55,7 @@ def get_ratings(chars):
     for char in chars:
         rating = char.rating
         sum = sum + rating
-        if rating>=max:
+        if rating>max:
             max = rating
     average = (sum/chars.count())
     return {'average_rating':average, 'max_rating':max}
