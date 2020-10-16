@@ -11,12 +11,14 @@ docker-compose build
 docker-compose up
 ```
 
+Se levanta en http://127.0.0.1:8000/
+
 ### endpoints
 ##### Obtener character 
 ```
-character/id
+api/character/id
 ```
 ##### Insertar id_personaje y su respectivo rating
 ```
-character/id/rating
+api/character/id/rating
 ```

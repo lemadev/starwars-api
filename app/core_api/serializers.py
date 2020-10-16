@@ -1,14 +1,5 @@
 from rest_framework import serializers
-from core_api.models import Character
-
-
-class CharacterModelSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Character
-        fields = '__all__'
-        read_only = ('id')
-    
+from core_api.models import Character  
 
 class CharacterSerializer(serializers.Serializer):
     """Custom serializer for character"""

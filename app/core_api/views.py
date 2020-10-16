@@ -1,17 +1,19 @@
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
-from core_api.serializers import CharacterSerializer, CharacterModelSerializer
+from core_api.serializers import CharacterSerializer
 from core_api.models import  Character
 import json
 
 def post_character(request, id, rating):
     if request.method == "POST":
-        character = Character(id_personaje=id, rating=rating)
-        character.save()
-        data = {'success':200}
-        return HttpResponse(data)
-
+            character = Character(id_personaje=id, rating=rating)
+            character.save()
+            data = {'success':200}
+            return HttpResponse(data, )
+    else:
+        return HttpResponse('Operacion no autorizada')
+        
 def get_character(request, id):
     hay_chars = Character.objects.all()
     if request.method == "GET":
@@ -32,6 +34,8 @@ def get_character(request, id):
             return HttpResponse(respuesta, content_type="application/json")
         else:
             return HttpResponse('No hay valores para el id ingresado')
+    else:
+        return HttpResponse('Operacion no autorizada', content_type="application/json")
 
 def get_homeworld(url_planet):
     """Obtengo datos del planeta del character"""
@@ -57,6 +61,8 @@ def get_ratings(chars):
         sum = sum + rating
         if rating>max:
             max = rating
+    print(sum)
+    print(chars.count())
     average = (sum/chars.count())
     return {'average_rating':average, 'max_rating':max}
 
