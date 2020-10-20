@@ -52,7 +52,7 @@ def get_specie(url_specie):
     return resp['name']
 
 def get_ratings(chars):
-    """Obtengo los datos"""
+    """Obtengo los datos de max_rating y average_rating"""
     sum = 0
     max = 0
     for char in chars:
@@ -60,8 +60,6 @@ def get_ratings(chars):
         sum = sum + rating
         if rating>max:
             max = rating
-    print(sum)
-    print(chars.count())
     average = (sum/chars.count())
     return {'average_rating':average, 'max_rating':max}
 
